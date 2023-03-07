@@ -1,2 +1,2 @@
 # Hotel-Management-System
-java project
+CSE310 project
