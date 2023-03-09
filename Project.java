@@ -35,6 +35,9 @@ class HotelMS {
 
                 }
                 break;
+
+            case 0:
+                System.out.println("welcome to staff services : )");
         }
     }
 }
