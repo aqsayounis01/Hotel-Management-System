@@ -38,6 +38,15 @@ class HotelMS {
 
             case 0:
                 System.out.println("welcome to staff services : )");
+                System.out.println("Enter C for veiwing the complains:");
+                char st= s.next().charAt(0);
+                switch (st)
+            {
+                case 'c':
+                    System.out.println("Pending...");
+
+            }
+
         }
     }
 }
