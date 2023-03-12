@@ -47,7 +47,8 @@ class HotelMS {
 
             }
 
-                System.out.println("Thanks for using HMS");
+                System.out.println("Thanks for using HMS : )");
+
         }
     }
 }
