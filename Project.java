@@ -1,14 +1,17 @@
 package HMS;
-
+import java.io.*;
 import java.util.Scanner;
+import java.io.PrintWriter;
 
 class HotelMS {
-    public static void main(String[] args) {
+    public static void main(String[] args)throws IOException
+    {
         Scanner s=new Scanner(System.in);
+        File loc = new File("F:\\prog\\java\\javaP\\src\\HMS");
 
         int x,n=50;
         int []av= new int[n];
-        //room no's
+        //room no's (0-49)
         for (int i = 0; i < n ; i++) {
             av[i]=i;
         }
@@ -19,83 +22,139 @@ class HotelMS {
         {
             case 1:
                 System.out.println("Dear customer, How can we help you?");
-                System.out.println("Enter B for Hotel Booking \nC for check out\nR for requests or complains:");
+                System.out.println("Enter I for Hotel Booking or Check out\nR for requests or complains:");
                 char ch;
-                ch= s.next().charAt(0);
+Scanner sc = new Scanner(System.in);
+
+                ch= sc.next().charAt(0);
+
                 int rn;
                 switch(ch)
                 {
-                    case 'B':
+                    case 'I':
 
-                        String name;
+                        char c;
+                        System.out.println("enter B for booking\nenter C for checkout");
+                        c=s.next().charAt(0);
+                        if(c=='B') {
+                            String name;
+                            String place;
+                            int people;
+                            System.out.println("Hotel Booking:");
+                            // enter details in the file with room no
 
-                        String place;
-                        int people;
-                        System.out.println("Hotel Booking:");
-                        // enter details in the file with room no
+                            int ac = 2500, pay, corr;
+                            System.out.println("Pay Rs 2500");
+                            pay = s.nextInt();
+                            if (pay < 2500 && pay > 0) {
+                                System.out.println("please pay the left amount i.e " + (ac - pay));
+                                corr = s.nextInt();
+                                System.out.println("Transaction successful...");
 
-                        int ac=2500,pay,corr;
-                        System.out.println("Your payment is Rs 2500");
-                        pay=s.nextInt();
-                        if (pay <2500 && pay>0) {
-                            System.out.println("please pay the left amount i.e " + (ac-pay));
-                            corr=s.nextInt();
-                            System.out.println("Transaction successful...");
+
+                            } else if (pay == 2500) {
+                                System.out.println("Transaction successful...");
+
+                            } else {
+                                System.out.println("invalid amount, Transaction unsuccessful...");
+                            }
+
+                            System.out.println("enter which room no you want to book (1-49):");
+
+                            rn = s.nextInt();
+
+                            System.out.println("enter your name:");
+                            s.nextLine();
+                            name = s.nextLine();
+
+                            String book = "Room no " +rn+" is booked by "+name;
+                            File ls[]= loc.listFiles();
+                            for (File k :ls)           //.equals("")
+                            {
+                                if(k.getName().equals("book.txt"))
+                                {
+                                    System.out.println("append the content into the new file");//append the content into the new file
+                                }
+                            }
+                            File f = new File("F:\\prog\\java\\javaP\\src\\HMS\\book.txt");
+                            f.createNewFile();
+                            PrintWriter p = new PrintWriter(f);
+                            p.print(book);
+                            p.close();
+
+
+
+
+//                            System.out.println(name);
+                            System.out.println("enter your place:");
+
+
+                            place = s.nextLine();
+//                            System.out.println(place);
+
+
+                            System.out.println("enter no of person:");
+                            people = s.nextInt();
+//                            System.out.println(people);
                             System.out.println("Room booked Successfully");
+                        } else if (c=='C') {
+                            System.out.println("Check out");
+                            // just release the room in the array
 
-                        }
-                        else if(pay ==2500)
-                        {
-                            System.out.println("Transaction successful...");
-                            System.out.println("Room booked Successfully");
+                            System.out.println("Enter your room no:");
+                            int room;
+                            room = s.nextInt();
+                            av[room]=room;
+                            String namech;
+
+                            System.out.println("enter your name:");
+                            s.nextLine();
+                            namech=s.nextLine();
+
+String avail_after_checkout="Room no "+room +"is left by "+namech;
+
+                            File ls[]=loc.listFiles();
+                            for (File k :ls)           //.equals("")
+                            {
+                                if(k.getName().equals("avail_after_checkout.txt") )
+                                {
+                                    System.out.println("appen the contents");
+                                }
+                            }
+                            File f = new File("F:\\prog\\java\\javaP\\src\\HMS\\avail_after_checkout.txt");
+                            f.createNewFile();
+                            PrintWriter p = new PrintWriter(f);
+                            p.print(avail_after_checkout);
+                            p.close();
+
                         }
                         else
                         {
-                            System.out.println("invalid amount, Transaction unsuccessful...");
+                            System.out.println("Invalid character");
                         }
 
-                        System.out.println("enter which room no you want to book (1-49):");
-
-                        rn=s.nextInt();
-
-                        for (int i = rn; i < n-1; i++) {
-                            av[i]=av[i+1];
-                        }
-                        n--;
-                        System.out.println("enter your name:");
-                        s.nextLine();
-                        name=s.nextLine();
-
-
-                        System.out.println(name);
-                        System.out.println("enter your place:");
-
-
-                        place=s.nextLine();
-                        System.out.println(place);
-
-
-                        System.out.println("enter no of person:");
-                        people=s.nextInt();
-
-                        System.out.println(people);
 
                         break;
                     case 'R':
-                        System.out.println("Requests/Complains");
-                        //user will enter the string mentioning the room no and that will be copied into the file
+                        System.out.println("Enter your Requests/Complains");
                         String comp;
+                        s.nextLine();
                         comp=s.nextLine();
+                        System.out.println("enter your name_roomno:");
+                        String nrm;
+                        nrm= s.next();
+                        File f = new File("F:\\prog\\java\\javaP\\src\\HMS\\"+nrm);
+                        f.createNewFile();
+
+
+                        PrintWriter p=new PrintWriter(f);
+                        p.print(comp);
+                        //user will enter the string mentioning the room no and that will be copied into the file
+                        p.close();
 
                         break;
-                    case 'C':
-                        System.out.println("Check out");
-                        // just release the room in the array
-                        n++;
-                        for (int i = 0; i <50 ; i++) {
-                            av[i]=i;
-                        }
-                        break;
+
+
                         default:
                             System.out.println("Invalid Character");
 
@@ -116,10 +175,8 @@ class HotelMS {
                     break;
                 case 'A':
                     System.out.println("check avalibility");
-                    //array with the room no's will be checked
-                    for (int i = 1; i <n ; i++) {
-                        System.out.println(av[i]);
-                    }
+                    //read the content of book and avail after check out
+
                     break;
                 default:
                     System.out.println("Invalid character");
