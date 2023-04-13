@@ -1,5 +1,3 @@
- // exception handling
-// format the time
 package HMS;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
