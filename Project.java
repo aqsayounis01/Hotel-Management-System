@@ -18,7 +18,7 @@ class HotelMS {
         File fch=new File("F:\\prog\\java\\javaP\\src\\HMS\\checkout.txt");
         File fc = new File("F:\\prog\\java\\javaP\\src\\HMS\\complains.txt");
         File f = new File("F:\\prog\\java\\javaP\\src\\HMS\\book.txt");
-        int x,n=50;
+int x,n=50;
         int []av= new int[n];
         //room no's (0-49)
         for (int i = 0; i < n ; i++) {
@@ -34,6 +34,7 @@ class HotelMS {
                 case 1:
                     System.out.println("Dear customer, How can we help you?");
                     System.out.println("-Enter I for Hotel Booking or Check out\n-R for requests or complains:");
+
                     char ch;
                     Scanner sc = new Scanner(System.in);
                     ch = sc.next().charAt(0);
@@ -91,9 +92,76 @@ class HotelMS {
                                     System.out.println("MORE THAN 3 PEOPLE NOT ALLOWED IN ONE ROOM");
                                 } else if (people <= 0) {
                                     System.out.println("INVALID INPUT");
+                                    return;
                                 } else {
                                     System.out.println("Room booked Successfully");
                                 }
+
+                                char r;
+                                System.out.println("Press R for Resturant option\nPress Q to exit:");
+                                r=s.next().charAt(0);
+                                switch (r) {
+                                    case 'R':
+                                        // Display menu and prompt user for input
+                                        System.out.println("Welcome to our restaurant! Here's our menu:");
+                                        System.out.println("1. Pizza - RS 129");
+                                        System.out.println("2. Burger - RS 89");
+                                        System.out.println("3. Pasta - RS 99");
+                                        System.out.println("4. Salad - RS 69");
+                                        System.out.println("Please enter the number of the item you'd like to order, or type 'done' to finish:");
+
+                                        // Define order variables
+                                        int pizzaCount = 0;
+                                        int burgerCount = 0;
+                                        int pastaCount = 0;
+                                        int saladCount = 0;
+
+                                        // Process user input
+                                        String input = s.nextLine();
+                                        while (!input.equals("done")) {
+                                            try {
+                                                int menuItem = Integer.parseInt(input);
+                                                switch (menuItem) {
+                                                    case 1:
+                                                        pizzaCount++;
+                                                        System.out.println("Added Pizza to your order.");
+                                                        break;
+                                                    case 2:
+                                                        burgerCount++;
+                                                        System.out.println("Added Burger to your order.");
+                                                        break;
+                                                    case 3:
+                                                        pastaCount++;
+                                                        System.out.println("Added Pasta to your order.");
+                                                        break;
+                                                    case 4:
+                                                        saladCount++;
+                                                        System.out.println("Added Salad to your order.");
+                                                        break;
+                                                    default:
+                                                        System.out.println("Invalid input. Please try again.");
+                                                        break;
+                                                }
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("Invalid input. Please enter a number.");
+                                            }
+                                            input = s.nextLine();
+                                        }
+
+                                        // Generate bill
+                                        double totalPrice = pizzaCount * 129 + burgerCount * 89 + pastaCount * 99 + saladCount * 69;
+                                        System.out.println("Your total bill is: RS " + totalPrice);
+
+                                    case 'Q':
+                                        System.out.println("Thanks for using HMS : )");
+                                        return;
+                                        default:
+                                            System.out.println("invalid character");
+                                            return;
+
+                                }
+
+
                             } else if (c == 'C') {
                                 System.out.println("Check out");
 
@@ -115,6 +183,7 @@ class HotelMS {
 
                             } else {
                                 System.out.println("Invalid character");
+                                return;
                             }
 
 
@@ -135,6 +204,7 @@ class HotelMS {
 
                         default:
                             System.out.println("Invalid Character");
+                            return;
 
 
                     }
@@ -169,6 +239,7 @@ class HotelMS {
                             break;
                         default:
                             System.out.println("Invalid character");
+                            return;
                     }
             }
         }
