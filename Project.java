@@ -55,21 +55,34 @@ int x,n=50;
 
 
                                 int ac = 2500, pay, corr;
-                                System.out.println("Pay Rs 2500");
-                                pay = s.nextInt();
-                                if (pay < 2500 && pay > 0) {
-                                    System.out.println("please pay the left amount i.e " + (ac - pay));
-                                    corr = s.nextInt();
-                                    System.out.println("Transaction successful...");
+                                    System.out.println("PAY 2500");
+                                    pay=s.nextInt();
+                                    if(pay==2500)
+                                    {
+                                        System.out.println("Transaction successful...");
+                                    }
+                                int pay2;
+                                while(pay!=2500) {
+                                    if(pay>2500 | pay<0){
+                                        System.out.println("invalid amount, Transaction unsuccessful...");
+                                        return;
+                                    }
+                                    if (pay < 2500 & pay > 0) {
+                                        System.out.println("enter the corr amount " + (ac - pay));
+                                        pay2 = s.nextInt();
+                                        ac = ac-pay;
+                                        pay = pay2;
+                                        if((ac-pay)==0)
+                                        {System.out.println("Transaction successful...");
+                                            break;
+                                        }
 
 
-                                } else if (pay == 2500) {
-                                    System.out.println("Transaction successful...");
-
-                                } else {
-                                    System.out.println("invalid amount, Transaction unsuccessful...");
-                                    return;
+                                    }
                                 }
+
+
+
 
                                 System.out.println("enter which room no you want to book (1-49):");
                                 rn = s.nextInt();
@@ -78,7 +91,7 @@ int x,n=50;
                                 s.nextLine();
                                 name = s.nextLine();
 
-                                String book = "Room no " + rn + " is booked by " + name + " on " + fordt;
+                                String book = "\nRoom no " + rn + " is booked by " + name + " on " + fordt;
 
 
                                 //append the content into the new file
@@ -173,7 +186,7 @@ int x,n=50;
                                 s.nextLine();
                                 namech = s.nextLine();
 
-                                String avail_after_checkout = "Room no " + room + "is left by " + namech + " on " + fordt;
+                                String avail_after_checkout = "\nRoom no " + room + "is left by " + namech + " on " + fordt;
 
 
                                 FileWriter fwc = new FileWriter("src/HMS/checkout.txt", true);
@@ -197,7 +210,7 @@ int x,n=50;
                             String nrm;
                             nrm = s.next();
                             FileWriter fwcp = new FileWriter("src/HMS/complains.txt", true);
-                            fwcp.write(comp + "...    " + nrm + "\n");
+                            fwcp.write("\n"+comp + "...    " + nrm );
                             fwcp.close();
                             break;
 
@@ -224,7 +237,7 @@ int x,n=50;
                             }
                             break;
                         case 'A':
-                            System.out.println("Avalibility (booked and checked out)");
+                            System.out.println("Availability (booked and checked out)");
                             Scanner scn = new Scanner(f);
                             while (scn.hasNext()) {
                                 System.out.println(scn.nextLine());
@@ -241,6 +254,8 @@ int x,n=50;
                             System.out.println("Invalid character");
                             return;
                     }
+                default:
+                    System.out.println("INVALID INPUT");
             }
         }
 catch (InputMismatchException e)
